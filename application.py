@@ -47,5 +47,14 @@ def index():
     
     return render_template('index.html', form1=form1, form2=form2)
 
+@application.route('/todoist_webhook', methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        print(request.json)
+        return '', 200
+    else:
+        abort(400)
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
