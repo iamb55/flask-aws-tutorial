@@ -33,7 +33,7 @@ def index():
         data_entered = Data(notes=form1.dbNotes.data)
         try:     
             db.session.add(data_entered)
-            todoist_airtable.insert({'Task Name': 'SUCCESS'})
+#            todoist_airtable.insert({'Task Name': 'SUCCESS'})
             db.session.commit()        
             db.session.close()
         except:
@@ -56,7 +56,7 @@ def index():
 @application.route('/todoist_webhook', methods=['POST'])
 def webhook():
     if request.method == 'POST':
-        todoist_airtable.create({'Task Name': 'SUCCESS'})
+        todoist_airtable.insert({'Task Name': 'SUCCESS'})
         print(request.json)
         return '', 200
     else:

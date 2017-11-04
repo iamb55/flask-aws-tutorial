@@ -55,8 +55,8 @@ def index():
 
 @application.route('/todoist_webhook', methods=['POST'])
 def webhook():
+    todoist_airtable.insert({'Task Name': 'SUCCESS'})
     if request.method == 'POST':
-        todoist_airtable.insert({'Task Name': 'SUCCESS'})
         print(request.json)
         return '', 200
     else:
