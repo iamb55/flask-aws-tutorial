@@ -33,6 +33,7 @@ def index():
         data_entered = Data(notes=form1.dbNotes.data)
         try:     
             db.session.add(data_entered)
+            todoist_airtable.create({'Task Name': 'SUCCESS'})
             db.session.commit()        
             db.session.close()
         except:

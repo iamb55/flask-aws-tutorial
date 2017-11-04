@@ -11,12 +11,17 @@ from flask import Flask, render_template, request
 from application import db
 from application.models import Data
 from application.forms import EnterDBInfo, RetrieveDBInfo
+from airtable import Airtable
 
 # Elastic Beanstalk initalization
 application = Flask(__name__)
 application.debug=True
-# change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'   
+
+base_key = 'appUecpt2d3HIznx5'
+table_name = 'Tasks'
+todoist_airtable = Airtable(base_key, table_name, api_key='keyDX0FzfNUQr3J0c')
+
 
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
@@ -50,6 +55,7 @@ def index():
 @application.route('/todoist_webhook', methods=['POST'])
 def webhook():
     if request.method == 'POST':
+        todoist_airtable.create({'Task Name': 'SUCCESS'})
         print(request.json)
         return '', 200
     else:
